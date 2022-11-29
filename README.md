@@ -10,6 +10,8 @@ Using the Dev Wallet within your project is extremely easy. All you have to do i
 
 ```javascript
 import '@carlosdp/dev-wallet';
+
+initializeDevWallet(provider);
 ```
 
 or
@@ -17,7 +19,11 @@ or
 ```html
 <html>
   <head>
-    <script type="text/javascript" src="https://unpkg.com/@carlosdp/dev-wallet@^1.0.0"></script>
+    <script type="module">
+      import { initializeDevWallet } from 'https://unpkg.com/@carlosdp/dev-wallet@^1.0.0';
+
+      intializeDevWallet(provider);
+    </script>
   </head>
 </html>
 ```
