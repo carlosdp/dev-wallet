@@ -9,7 +9,7 @@ This library provides an embedded Ethereum wallet that makes local development w
 Using the Dev Wallet within your project is extremely easy. All you have to do is import the library (at the earliest possible point), and it will override `window.ethereum` with Dev Wallet. You should make sure to only do this in local dev environments, or staging environments where you don't want to have the user use their own wallet.
 
 ```javascript
-import '@carlosdp/dev-wallet';
+import 'dev-wallet';
 
 initializeDevWallet(provider);
 ```
@@ -20,7 +20,7 @@ or
 <html>
   <head>
     <script type="module">
-      import { initializeDevWallet } from 'https://unpkg.com/@carlosdp/dev-wallet@^1.0.0';
+      import { initializeDevWallet } from 'https://unpkg.com/dev-wallet@^1.0.0';
 
       initializeDevWallet(provider);
     </script>

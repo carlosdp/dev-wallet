@@ -128,11 +128,7 @@ export class DevWallet implements ethers.providers.ExternalProvider {
         delete req.params[0]['gas'];
         const result = await this.wallet.sendTransaction(req.params[0]);
 
-        return {
-          id: 1,
-          jsonrpc: '2.0',
-          result: result.hash,
-        }
+        return result.hash;
       }
       case 'eth_decrypt': {
         throw new Error('eth_decrypt not implemented');
@@ -238,5 +234,13 @@ export class DevWallet implements ethers.providers.ExternalProvider {
     }
 
     this.addEventListener(event, handler);
+  }
+
+  removeListener<T extends keyof WalletEventHandlers>(event: T, handler: WalletEventHandlers[T][number]) {
+    if (!this.eventHandlers[event]) {
+      return;
+    }
+
+    this.removeEventListener(event, handler);
   }
 }

@@ -1,5 +1,7 @@
 import { ethers } from "ethers";
 
+import { Button } from "./Button";
+
 export type TransactionRequestProps = {
   tx: ethers.providers.TransactionRequest;
   onConfirm: () => void;
@@ -17,8 +19,8 @@ export const TransactionRequest = ({ tx, onConfirm, onReject }: TransactionReque
         </div>
       </div>
       <div style={{ display: 'flex', flexDirection: 'row', gap: '12px' }}>
-        <button onClick={onConfirm}>Confirm</button>
-        <button onClick={onReject}>Reject</button>
+        <Button onClick={onConfirm}>Confirm</Button>
+        <Button onClick={onReject}>Reject</Button>
       </div>
     </div>
   );

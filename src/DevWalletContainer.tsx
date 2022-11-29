@@ -66,7 +66,7 @@ export const DevWalletContainer = ({ wallet }: DevWalletContainerProps) => {
   }, [pendingTransactions]);
 
   return (
-    <div style={{ display: pendingConnectRequest || pendingTransactions.length > 0 ? 'block' : 'none', position: 'fixed', top: 0, right: 0, width: '300px' }}>
+    <div style={{ display: pendingConnectRequest || pendingTransactions.length > 0 ? 'block' : 'none', position: 'fixed', top: '20px', right: '20px', width: '300px' }}>
       {pendingConnectRequest && (<ConnectionRequest onConfirm={confirmConnection} onReject={rejectConnection} />)}
       {pendingTransactions.map(({ tx }, i) => (
         <TransactionRequest key={i} tx={tx} onConfirm={() => acceptRequest(i)} onReject={() => rejectRequest(i)} />
