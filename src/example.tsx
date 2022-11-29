@@ -11,9 +11,9 @@ import {
 import { jsonRpcProvider } from 'wagmi/providers/jsonRpc';
 import { createRoot } from 'react-dom/client';
 
-import { intializeDevWallet } from './index';
+import { initializeDevWallet } from './index';
 
-intializeDevWallet(new ethers.providers.JsonRpcProvider('/rpc'));
+initializeDevWallet(new ethers.providers.JsonRpcProvider('/rpc'));
 
 const { chains, provider } = configureChains(
   [chain.hardhat],
