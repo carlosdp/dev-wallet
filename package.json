@@ -1,6 +1,6 @@
 {
   "name": "dev-wallet",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "author": "Carlos Diaz-Padron",
   "type": "module",
   "main": "dist/index.js",

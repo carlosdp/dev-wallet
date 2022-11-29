@@ -126,7 +126,13 @@ export class DevWallet implements ethers.providers.ExternalProvider {
         }
 
         delete req.params[0]['gas'];
-        return this.wallet.sendTransaction(req.params[0]);
+        const result = await this.wallet.sendTransaction(req.params[0]);
+
+        return {
+          id: 1,
+          jsonrpc: '2.0',
+          result: result.hash,
+        }
       }
       case 'eth_decrypt': {
         throw new Error('eth_decrypt not implemented');
