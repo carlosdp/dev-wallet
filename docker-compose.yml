@@ -1,0 +1,20 @@
+version: "3"
+services:
+  server:
+    image: node:16-bullseye
+    working_dir: /workspace
+    command:
+      - yarn
+      - start
+    ports:
+      - 3000:3000
+    volumes:
+      - ./:/workspace:rw
+  anvil:
+    image: ghcr.io/foundry-rs/foundry:latest
+    command:
+      - anvil
+    ports:
+      - 8545:8545
+    environment:
+      ANVIL_IP_ADDR: 0.0.0.0
