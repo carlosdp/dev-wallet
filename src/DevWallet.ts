@@ -38,7 +38,7 @@ export class DevWallet implements ethers.providers.ExternalProvider {
   eventHandlers: WalletEventHandlers;
 
   constructor(provider: ethers.providers.JsonRpcProvider, options?: DevWalletOptions) {
-    this.wallet = new ethers.Wallet(options?.privateKey ?? DEFAULT_PRIVATE_KEY);
+    this.wallet = new ethers.Wallet(options?.privateKey ?? DEFAULT_PRIVATE_KEY, provider);
     this.baseProvider = provider;
     this.skipAuthorization = options?.skipAuthorization || false;
     this.connectionAuthorized = window.localStorage.getItem('devWallet_connectAuthorized') === 'true' || !!this.skipAuthorization;
@@ -125,9 +125,8 @@ export class DevWallet implements ethers.providers.ExternalProvider {
           await promise;
         }
 
-        const tx = await this.wallet.signTransaction(req.params[0]);
-
-        return this.baseProvider.send('eth_sendRawTransaction', [tx]);
+        delete req.params[0]['gas'];
+        return this.wallet.sendTransaction(req.params[0]);
       }
       case 'eth_decrypt': {
         throw new Error('eth_decrypt not implemented');

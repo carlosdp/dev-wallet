@@ -6,6 +6,8 @@ import {
   chain,
   configureChains,
   createClient,
+  useSendTransaction,
+  useSigner,
   WagmiConfig,
 } from 'wagmi';
 import { jsonRpcProvider } from 'wagmi/providers/jsonRpc';
@@ -35,9 +37,12 @@ const wagmiClient = createClient({
 });
 
 const Example = () => {
+  const { sendTransactionAsync } = useSendTransaction({ mode: 'prepared', request: { to: '0x70997970c51812dc3a010c7d01b50e0d17dc79c8', value: ethers.BigNumber.from(100), gasLimit: ethers.BigNumber.from('100000000000000000') } });
+
   return (
     <div>
       <ConnectButton />
+      { sendTransactionAsync && <button onClick={() => sendTransactionAsync()}>Send Transaction</button>}
     </div>
   )
 };
