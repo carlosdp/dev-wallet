@@ -1,5 +1,6 @@
 import { ethers } from "ethers";
 import { useCallback, useEffect, useState } from "react";
+import { Box } from '@chakra-ui/react';
 import { ConnectionRequest } from "./ConnectionRequest";
 import { DevWallet, DevWalletDeferredResponse } from "./DevWallet";
 import { TransactionRequest } from "./TransactionRequest";
@@ -66,11 +67,11 @@ export const DevWalletContainer = ({ wallet }: DevWalletContainerProps) => {
   }, [pendingTransactions]);
 
   return (
-    <div style={{ display: pendingConnectRequest || pendingTransactions.length > 0 ? 'block' : 'none', position: 'fixed', top: '20px', right: '20px', width: '300px' }}>
+    <Box display={pendingConnectRequest || pendingTransactions.length > 0 ? 'block' : 'none'} position='fixed' top='20px' right='20px' width='300px' fontFamily='body' zIndex='2147483647'>
       {pendingConnectRequest && (<ConnectionRequest onConfirm={confirmConnection} onReject={rejectConnection} />)}
       {pendingTransactions.map(({ tx }, i) => (
         <TransactionRequest key={i} tx={tx} onConfirm={() => acceptRequest(i)} onReject={() => rejectRequest(i)} />
       ))}
-    </div>
+    </Box>
   );
 };

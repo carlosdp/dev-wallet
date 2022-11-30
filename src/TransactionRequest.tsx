@@ -1,6 +1,5 @@
 import { ethers } from "ethers";
-
-import { Button } from "./Button";
+import { Box, Button, Text, Heading, Card, CardHeader, CardBody, CardFooter, Stack, StackDivider } from '@chakra-ui/react';
 
 export type TransactionRequestProps = {
   tx: ethers.providers.TransactionRequest;
@@ -10,18 +9,30 @@ export type TransactionRequestProps = {
 
 export const TransactionRequest = ({ tx, onConfirm, onReject }: TransactionRequestProps) => {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', padding: '20px', backgroundColor: 'white', borderRadius: '4px', boxShadow: '7px 5px 37px -1px rgba(41,40,40,0.75)' }}>
-      <div>Transaction Request</div>
-      <div>
-        <div>
-          <span>Value</span>
-          <span>{tx.value ? ethers.utils.formatEther(tx.value) : '0'} ETH</span>
-        </div>
-      </div>
-      <div style={{ display: 'flex', flexDirection: 'row', gap: '12px' }}>
-        <Button onClick={onConfirm}>Confirm</Button>
-        <Button onClick={onReject}>Reject</Button>
-      </div>
-    </div>
+    <Card>
+      <CardHeader>
+        <Heading size='md'>Transaction Request</Heading>
+      </CardHeader>
+      <CardBody>
+        <Stack divider={<StackDivider />} spacing={4}>
+          <Box>
+            <Heading size='sx' textTransform='uppercase'>To</Heading>
+            <Text paddingTop={2} fontSize='sm'>{tx.to}</Text>
+          </Box>
+          <Box>
+            <Heading size='sx' textTransform='uppercase'>Value</Heading>
+            <Text paddingTop={2} fontSize='sm'>{tx.value ? ethers.utils.formatEther(tx.value) : '0'} ETH</Text>
+          </Box>
+          <Box>
+            <Heading size='sx' textTransform='uppercase'>Transaction Type</Heading>
+            <Text paddingTop={2} fontSize='sm'>{!!tx.data ? 'Contract Call' : 'Value Send'}</Text>
+          </Box>
+        </Stack>
+      </CardBody>
+      <CardFooter display='flex' flexDirection='row' gap='12px'>
+        <Button colorScheme='blue' onClick={onConfirm}>Confirm</Button>
+        <Button colorScheme='red' onClick={onReject}>Reject</Button>
+      </CardFooter>
+    </Card>
   );
 };

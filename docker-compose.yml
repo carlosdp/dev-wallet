@@ -5,7 +5,7 @@ services:
     working_dir: /workspace
     command:
       - yarn
-      - start
+      - start:client
     ports:
       - 3000:3000
     volumes:
